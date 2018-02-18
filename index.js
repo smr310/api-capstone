@@ -24,21 +24,23 @@ function youtubeCall(quote, movie) {
     const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 
     const query = {
-        q: quote,
+        q: `${quote} ${movie} scene`,
         per_page: 1,
         part: 'snippet',
         key: "AIzaSyDW01WDj_JY47WKZmAJ14fj7TXaiM-nOZM"
 
     }
     $.getJSON(YOUTUBE_SEARCH_URL, query, getJSONCB);
+    console.log(query.q);
 }
 
 function getJSONCB(data) {
     console.log(data);
+    
     $("#video").html(
         `<iframe allowFullScreen="true" webkitallowfullscreen="true" width="420" height="315" src=https://www.youtube.com/embed/${data.items[0].id.videoId}?autoplay=1></iframe>`
     );
-    console.log(data)
+    console.log(data);
 }
 
 // {/* <iframe width="420" height="315"
