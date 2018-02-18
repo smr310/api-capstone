@@ -24,7 +24,7 @@ function youtubeCall(quote, movie) {
     const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 
     const query = {
-        q: `${quote} ${movie} scene`,
+        q: `${quote} ${movie} movie scene`,
         per_page: 1,
         part: 'snippet',
         key: "AIzaSyDW01WDj_JY47WKZmAJ14fj7TXaiM-nOZM"
@@ -35,12 +35,38 @@ function youtubeCall(quote, movie) {
 }
 
 function getJSONCB(data) {
-    console.log(data);
     
-    $("#video").html(
-        `<iframe allowFullScreen="true" webkitallowfullscreen="true" width="420" height="315" src=https://www.youtube.com/embed/${data.items[0].id.videoId}?autoplay=1></iframe>`
-    );
-    console.log(data);
+    for (let i = 0; i < 5; i++) {
+        if (data.items[i].snippet.channelTitle !== "Movieclips") {
+            $("#video").html(
+                `<iframe allowFullScreen="true" webkitallowfullscreen="true" width="420" height="315" src=https://www.youtube.com/embed/${data.items[i].id.videoId}?autoplay=1></iframe>`
+            );
+            console.log(data);
+            console.log(data.items[0].snippet.channelTitle);
+            console.log(data.items[1].snippet.channelTitle);
+            console.log(data.items[2].snippet.channelTitle);
+            console.log(data.items[3].snippet.channelTitle);
+            console.log(data.items[4].snippet.channelTitle);
+            break;
+        }   
+    }
+
+    // if (data.items[0].snippet.channelTitle !== "Movieclips") {
+    //         $("#video").html(
+    //             `<iframe allowFullScreen="true" webkitallowfullscreen="true" width="420" height="315" src=https://www.youtube.com/embed/${data.items[0].id.videoId}?autoplay=1></iframe>`
+    //         );
+    //         console.log(data)
+    //         console.log(data.items[0].snippet.channelTitle);
+    //         console.log(data.items[1].snippet.channelTitle);
+    //         console.log(data.items[2].snippet.channelTitle);
+    //         console.log(data.items[3].snippet.channelTitle);
+    //         console.log(data.items[4].snippet.channelTitle);
+    //     } else {
+    //         $("#video").html(
+    //             `<iframe allowFullScreen="true" webkitallowfullscreen="true" width="420" height="315" src=https://www.youtube.com/embed/${data.items[1].id.videoId}?autoplay=1></iframe>`
+    //         );
+    // }
+
 }
 
 // {/* <iframe width="420" height="315"
