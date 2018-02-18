@@ -18,3 +18,7 @@ var loadquote = function() {
 $("#get-quote-button").on("click", function() {
     loadquote();
 })
+
+
+
+//new code
