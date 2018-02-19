@@ -5,7 +5,7 @@ var loadquote = function() {
         data: {},
         dataType: 'json',
         success: function(data) {
-            $("#quote-text").html(data.quote);
+            $("#quote-text").html(`"${data.quote}"`);
             $("#quote-author").html(data.author);
             youtubeCall(data.quote, data.author);
         },
@@ -39,7 +39,7 @@ function getJSONCB(data) {
     for (let i = 0; i < 5; i++) {
         if (data.items[i].snippet.channelTitle !== "Movieclips") {
             $("#video").html(
-                `<iframe allowFullScreen="true" webkitallowfullscreen="true" width="420" height="315" src=https://www.youtube.com/embed/${data.items[i].id.videoId}?autoplay=1></iframe>`
+                `<iframe allowFullScreen="true" webkitallowfullscreen="true" width="560" height="315" src=https://www.youtube.com/embed/${data.items[i].id.videoId}?autoplay=1></iframe>`
             );
             console.log(data);
             console.log(data.items[0].snippet.channelTitle);
@@ -51,27 +51,4 @@ function getJSONCB(data) {
         }   
     }
 
-    // if (data.items[0].snippet.channelTitle !== "Movieclips") {
-    //         $("#video").html(
-    //             `<iframe allowFullScreen="true" webkitallowfullscreen="true" width="420" height="315" src=https://www.youtube.com/embed/${data.items[0].id.videoId}?autoplay=1></iframe>`
-    //         );
-    //         console.log(data)
-    //         console.log(data.items[0].snippet.channelTitle);
-    //         console.log(data.items[1].snippet.channelTitle);
-    //         console.log(data.items[2].snippet.channelTitle);
-    //         console.log(data.items[3].snippet.channelTitle);
-    //         console.log(data.items[4].snippet.channelTitle);
-    //     } else {
-    //         $("#video").html(
-    //             `<iframe allowFullScreen="true" webkitallowfullscreen="true" width="420" height="315" src=https://www.youtube.com/embed/${data.items[1].id.videoId}?autoplay=1></iframe>`
-    //         );
-    // }
-
 }
-
-// {/* <iframe width="420" height="315"
-// src="https://www.youtube.com/embed/tgbNymZ7vqY">
-// </iframe> */}
-
-//this is the link: https://www.youtube.com/watch?v=
-// add id after = 
