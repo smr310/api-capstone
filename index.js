@@ -6,8 +6,8 @@ var loadquote = function() {
         dataType: 'json',
         success: function(data) {
             $("#quote-text").html(`"${data.quote}"`);
-            $("#quote-author").html(data.author);
             youtubeCall(data.quote, data.author);
+            movieInfoCall(data.author);
         },
         error: function(err) { alert("Internet Disconnected!"); },
         beforeSend: function(xhr) {
@@ -19,6 +19,28 @@ var loadquote = function() {
 $("#get-quote-button").on("click", function() {
     loadquote();
 })
+
+
+function movieInfoCall(movieName) {
+    const OMDB_REQUEST_URL = 'http://www.omdbapi.com/?apikey=26e9994f&';
+    const query = {
+        t: `${movieName}`, 
+    }
+    $.getJSON(OMDB_REQUEST_URL, query, showResultsOMDB); 
+}
+
+function showResultsOMDB(data) {
+    console.log(data)
+    console.log(data.Year)
+    $(".div-right").html(`<p class="title">${data.Title}</p>`);
+    $(".div-right").append(`<p>Year: ${data.Year}</p>`);
+    $(".div-right").append(`<p>Director: ${data.Director}</p>`);
+    $(".div-right").append(`<p>Cast: ${data.Actors}</p>`);
+    $(".div-right").append(`<p>Story: ${data.Plot}</p>`);
+
+
+}
+
 
 function youtubeCall(quote, movie) {
     const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
@@ -52,3 +74,5 @@ function getJSONCB(data) {
     }
 
 }
+
+//key for omdb api: 26e9994f
