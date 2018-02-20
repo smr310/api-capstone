@@ -33,10 +33,10 @@ function showResultsOMDB(data) {
     console.log(data)
     console.log(data.Year)
     $(".div-right").html(`<p class="title">${data.Title}</p>`);
-    $(".div-right").append(`<p>Year: ${data.Year}</p>`);
-    $(".div-right").append(`<p>Director: ${data.Director}</p>`);
-    $(".div-right").append(`<p>Cast: ${data.Actors}</p>`);
-    $(".div-right").append(`<p>Story: ${data.Plot}</p>`);
+    $(".div-right").append(`<p class="property-name">Year: <span class="info-text">${data.Year}</span></p>`);
+    $(".div-right").append(`<p class="property-name">Director: <span class="info-text">${data.Director}</span></p>`);
+    $(".div-right").append(`<p class="property-name">Cast: <span class="info-text">${data.Actors}</span></p>`);
+    $(".div-right").append(`<p class="property-name">Story: <span class="info-text">${data.Plot}</span></p>`);
 
 
 }
