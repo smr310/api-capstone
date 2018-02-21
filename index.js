@@ -61,7 +61,7 @@ function getJSONCB(data) {
     for (let i = 0; i < 5; i++) {
         if (data.items[i].snippet.channelTitle !== "Movieclips") {
             $("#video").html(
-                `<iframe allowFullScreen="true" webkitallowfullscreen="true" width="560" height="315" src=https://www.youtube.com/embed/${data.items[i].id.videoId}?autoplay=1></iframe>`
+                `<div class="video-container"><iframe width="853" height="480" src="https://www.youtube.com/embed/${data.items[i].id.videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe></div>`
             );
             console.log(data);
             console.log(data.items[0].snippet.channelTitle);
