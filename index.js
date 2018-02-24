@@ -16,7 +16,7 @@ var loadquote = function() {
     });
 };
 
-$("#button").on("click", function () {
+$("#button").on("click", function() {
     loadquote();
 });
 
@@ -59,7 +59,8 @@ function youtubeCall(quote, movie) {
 function getJSONCB(data) {
     
     for (let i = 0; i < 5; i++) {
-        if (data.items[i].snippet.channelTitle !== "Movieclips") {
+        if (data.items[i].snippet.channelTitle !== "Movieclips" &&
+            data.items[i].snippet.title !== "AFI's 100 Movie Quotes (Part 1)") {
             $("#video").html(
                 `<div id="video-outer-container"><div class="video-container"><iframe width="500" height="300" src="https://www.youtube.com/embed/${data.items[i].id.videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe></div></div>`
             );

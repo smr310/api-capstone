@@ -7,27 +7,25 @@
     width: 90%;
     max-width: 1024px;
     margin: auto;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .div-left{
-    /* margin-top: 60px; 
-    margin-left: 60px;
-    border: 1px solid red;
-    display: inline-block;  */
-    width: 50%;
+    /* border: 1px solid red; */
+    margin-top: 50px;
+    width: 60%;
     float: left;
-
 }
 
 .div-right{
+    margin-top: 50px; 
     color: white;
-    margin: auto;
     font-size: 20px;
-    border: 1px solid red;
-    width: 50%; 
+    /* border: 1px solid red; */
+    width: 40%; 
     float:left;
-    padding-left: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .group:before,
@@ -44,15 +42,18 @@
     zoom: 1;
 }
 
-/* @media only screen and (max-width:768px) {
-    .col-3 {
-        width: 80%;
+@media only screen and (max-width:768px) {
+    .div-left {
+        width: 100%;
     }
-    .col-6 {
-        width: 80%;
+    .div-right {
+        width: 100%;
     } 
-}  */
-
+    #button {
+        margin-top: 30px;
+        margin: 0px;
+    }
+} 
 
 .video-container {
     position: relative;
@@ -83,7 +84,6 @@ main {
 
 header {
     margin-top: 70px; 
-    margin-left: 50px;
     color: white;
     text-align: left;
     font-family: Courier New;
@@ -91,22 +91,11 @@ header {
     display: inline-block;
 }
 
-/* #quote-text {
-    text-align: center;
-    margin: 10px; 
-    font-size: 18px;
-    font-family: comic sans MS;
-    font-style: italic;
-    color: white;
-} */
-
-
-
 .title{
     color: white;
     font-family: 'Trebuchet MS';
     font-weight: bold;
-    font-size: 35px;
+    font-size: 28px;
     margin: 0px;
 }
 
@@ -126,11 +115,11 @@ header {
 #button {
     padding: 10px;
     border: none;
-    background-color: #2DDDFF;
+    background-color: #23CDFD;
     color: black;
     font-size: 20px;
     text-transform: uppercase;
-    border-radius: 0;
+    border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
@@ -138,8 +127,17 @@ header {
   }
   
   #button:hover, #button:focus {
-    background-color: yellow;
+    background-color: #16FEB2;
     color: black;
   }
 
+
+  /* #quote-text {
+    text-align: center;
+    margin: 10px; 
+    font-size: 18px;
+    font-family: comic sans MS;
+    font-style: italic;
+    color: white;
+} */
 
