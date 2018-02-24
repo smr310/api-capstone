@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -7,15 +7,12 @@
     <link href="index.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <main role="main">
-      <header>good scenes from good movies</header>
-      <button id="button">Generate Scene</button>
-      <section id="js-generated" aria-live="assertive">
-        <div class="div-left col-6" id="video"></div>
-        <div class="div-right col-3">
-        </div>
-      </section>
-    </main>
+    <div id="container">
+        <header>good scenes from good movies</header>
+        <button id="button">Generate Scene</button>
+          <div class="div-left group" id="video"></div>
+          <div class="div-right group"></div>
+    </div>
     <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="index.js"></script>
   </body>

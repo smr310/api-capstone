@@ -3,26 +3,45 @@
     background-color: black;
 }
 
-/* .div-left{
-    margin-top: 60px; 
+#container {
+    width: 90%;
+    max-width: 1024px;
+    margin: auto;
+    border: 1px solid red;
+}
+
+.div-left{
+    /* margin-top: 60px; 
     margin-left: 60px;
     border: 1px solid red;
-    display: inline-block; 
-} */
+    display: inline-block;  */
+    width: 50%;
+    float: left;
+
+}
 
 .div-right{
     color: white;
     margin: auto;
-    text-align: left;
     font-size: 20px;
     border: 1px solid red;
-    display: inline-block;
+    width: 50%; 
+    float:left;
+    padding-left: 20px;
 }
 
-@media only screen and (min-width: 768px) {
-    /* For desktop: */
-    /* .col-3 {width: 30%;}
-    .col-6 {width: 50%;} */
+.group:before,
+.group:after {
+    content: "";
+    display: table;
+}
+
+.group:after {
+    clear: both;
+}
+
+.group {
+    zoom: 1;
 }
 
 /* @media only screen and (max-width:768px) {
@@ -43,20 +62,17 @@
     overflow: hidden;
     }
      
-    
     .video-container iframe, .video-container object, .video-container embed {
         position:absolute;
         top:0;
         left:0;
         width:100%; 
-        /* max-width: 500px; */
         height:100%;
     }
 
 #video-outer-container {
-    width: 80%; 
-    max-width: 640px;
-    margin: 0 auto;
+    /* width: 60%;  */
+    /* margin: 0 auto; */
     border: 1px solid green;
 }
 
@@ -75,14 +91,14 @@ header {
     display: inline-block;
 }
 
-#quote-text {
+/* #quote-text {
     text-align: center;
     margin: 10px; 
     font-size: 18px;
     font-family: comic sans MS;
     font-style: italic;
     color: white;
-}
+} */
 
 
 
@@ -108,13 +124,13 @@ header {
 }
 
 #button {
-    padding: 20px;
+    padding: 10px;
     border: none;
     background-color: #2DDDFF;
     color: black;
-    font-size: 30px;
+    font-size: 20px;
     text-transform: uppercase;
-    border-radius: 30px;
+    border-radius: 0;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
@@ -122,7 +138,7 @@ header {
   }
   
   #button:hover, #button:focus {
-    background-color: #2DDDFF;
+    background-color: yellow;
     color: black;
   }
 
