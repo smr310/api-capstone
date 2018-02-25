@@ -44,10 +44,6 @@
     zoom: 1;
 }
 
-
-
-
-
 .video-container {
     position: relative;
     padding-bottom: 56.25%;
@@ -125,10 +121,6 @@ header {
     background-color: #14E6DC;
     color: black;
   }
-
-  button.pressed {
-    background-color: red;
-}
 
 @media only screen and (max-width:1026px) {
     .button {

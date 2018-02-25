@@ -1,11 +1,18 @@
-var loadquote = function() {
+$(".button").on("click", function() {
+    loadquote();
+});
+
+//api that returns random famous movie quote
+function loadquote() {
     $.ajax({
         type: "GET",
         url: "https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies&count=1",
         data: {},
         dataType: 'json',
         success: function(data) {
-            youtubeCall(data.quote, data.author);
+            let movieQuote = data.quote;
+            let movieName = data.author;
+            displayVideoAndInfo(movieQuote, movieName);
         },
         error: function(err) { alert("Internet Disconnected!"); },
         beforeSend: function(xhr) {
@@ -14,17 +21,35 @@ var loadquote = function() {
     });
 };
 
-$(".button").on("click", function() {
-    loadquote();
-});
-
-
+//api that returns movie details 
 function movieInfoCall(movieName) {
     const OMDB_REQUEST_URL = 'http://www.omdbapi.com/?apikey=26e9994f&';
     const query = {
         t: `${movieName}`, 
     }
     $.getJSON(OMDB_REQUEST_URL, query, showResultsOMDB); 
+}
+
+
+function displayVideoAndInfo(quote, movie) {
+    const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
+
+    const query = {
+        q: `${quote} ${movie} movie scene`,
+        per_page: 1,
+        part: 'snippet',
+        key: "AIzaSyDW01WDj_JY47WKZmAJ14fj7TXaiM-nOZM"
+
+    }
+
+    if (checkVideoBrokenStatus(quote)) {
+        loadquote(); 
+    } else {
+        $.getJSON(YOUTUBE_SEARCH_URL, query, getJSONCB);
+        movieInfoCall(movie);
+        console.log(quote);
+        console.log(query.q);
+    }
 }
 
 function showResultsOMDB(data) {
@@ -35,22 +60,29 @@ function showResultsOMDB(data) {
     $(".div-right").append(`<p class="property-name">Director: <span class="info-text">${data.Director}</span></p>`);
     $(".div-right").append(`<p class="property-name">Cast: <span class="info-text">${data.Actors}</span></p>`);
     $(".div-right").append(`<p class="property-name">Story: <span class="info-text">${data.Plot}</span></p>`);
+}
 
+function getJSONCB(data) {
+    for (let i = 0; i < 5; i++) {
+        if (data.items[i].snippet.channelTitle !== "Movieclips" &&
+            data.items[i].snippet.title !== "AFI's 100 Movie Quotes (Part 1)") {
+            $("#video").html(
+                `<div id="video-outer-container"><div class="video-container"><iframe width="500" height="300" src="https://www.youtube.com/embed/${data.items[i].id.videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe></div></div>`
+            );
+            console.log(data);
+            break;
+        }   
+    }
 
 }
 
-function youtubeCall(quote, movie) {
-    const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 
-    const query = {
-        q: `${quote} ${movie} movie scene`,
-        per_page: 1,
-        part: 'snippet',
-        key: "AIzaSyDW01WDj_JY47WKZmAJ14fj7TXaiM-nOZM"
 
-    }
-    
 
+
+
+
+function checkVideoBrokenStatus(quote){ 
     if(
         quote !== brokenVids.a && 
         quote !== brokenVids.b &&
@@ -68,37 +100,19 @@ function youtubeCall(quote, movie) {
         quote !== brokenVids.n &&
         quote !== brokenVids.o &&
         quote !== brokenVids.p &&
-        quote !== brokenVids.q
+        quote !== brokenVids.q &&
+        quote !== brokenVids.r
 
     ) {
-        $.getJSON(YOUTUBE_SEARCH_URL, query, getJSONCB);
-        movieInfoCall(movie);
-        console.log(quote);
-        console.log(query.q);
+        return false; 
     } else {
-        loadquote(); 
+        return true;
     }
 }
 
-function getJSONCB(data) {
-    for (let i = 0; i < 5; i++) {
-        if (data.items[i].snippet.channelTitle !== "Movieclips" &&
-            data.items[i].snippet.title !== "AFI's 100 Movie Quotes (Part 1)") {
-            $("#video").html(
-                `<div id="video-outer-container"><div class="video-container"><iframe width="500" height="300" src="https://www.youtube.com/embed/${data.items[i].id.videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe></div></div>`
-            );
-            console.log(data);
-            console.log(data.items[0].snippet.channelTitle);
-            console.log(data.items[1].snippet.channelTitle);
-            console.log(data.items[2].snippet.channelTitle);
-            console.log(data.items[3].snippet.channelTitle);
-            console.log(data.items[4].snippet.channelTitle);
-            break;
-        }   
-    }
 
-}
 
+//these quotes belong to broken videos
 const brokenVids = {
     a: "What we've got here is failure to communicate.",
     b: "Why don't you come up sometime and see me?",
@@ -117,8 +131,6 @@ const brokenVids = {
     o: "Play it, Sam. Play 'As Time Goes By.'",
     p: "Nobody puts Baby in a corner.",
     q: "E.T. phone home.",
-
-
-
+    r: "Keep your friends close, but your enemies closer.",
+    
 }
-//key for omdb api: 26e9994f
