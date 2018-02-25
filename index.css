@@ -8,24 +8,26 @@
     max-width: 1024px;
     margin: auto;
     /* border: 1px solid red; */
+    position: relative;
 }
 
 .div-left{
     /* border: 1px solid red; */
-    margin-top: 50px;
+    margin-top: 20px;
     width: 60%;
     float: left;
 }
 
 .div-right{
-    margin-top: 50px; 
+    margin-top: 20px; 
     color: white;
     font-size: 20px;
     /* border: 1px solid red; */
     width: 40%; 
     float:left;
-    padding-left: 40px;
+    padding-left: 60px;
     padding-right: 40px;
+    padding-top: 40px;
 }
 
 .group:before,
@@ -42,18 +44,9 @@
     zoom: 1;
 }
 
-@media only screen and (max-width:768px) {
-    .div-left {
-        width: 100%;
-    }
-    .div-right {
-        width: 100%;
-    } 
-    #button {
-        margin-top: 30px;
-        margin: 0px;
-    }
-} 
+
+
+
 
 .video-container {
     position: relative;
@@ -74,7 +67,7 @@
 #video-outer-container {
     /* width: 60%;  */
     /* margin: 0 auto; */
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 main {
@@ -83,7 +76,8 @@ main {
 }
 
 header {
-    margin-top: 70px; 
+    margin-top: 70px;
+    margin-bottom: 70px; 
     color: white;
     text-align: left;
     font-family: Courier New;
@@ -112,7 +106,7 @@ header {
     color: white;
 }
 
-#button {
+.button {
     padding: 10px;
     border: none;
     background-color: #23CDFD;
@@ -122,11 +116,12 @@ header {
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-align: center;
-    margin-left: 80px;
+    position: absolute;
+    left: 710px;
+    bottom: 69px; 
   }
   
-  #button:hover, #button:focus {
+  .button:hover, .button:focus {
     background-color: #16FEB2;
     color: black;
   }
@@ -141,3 +136,25 @@ header {
     color: white;
 } */
 
+@media only screen and (max-width:1026px) {
+    .button {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+    }
+
+}
+
+@media only screen and (max-width:768px) {
+    .div-left {
+        width: 100%;
+    }
+    .div-right {
+        width: 100%;
+    } 
+    .button {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+    }
+}

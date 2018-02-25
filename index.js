@@ -16,7 +16,7 @@ var loadquote = function() {
     });
 };
 
-$("#button").on("click", function() {
+$(".button").on("click", function() {
     loadquote();
 });
 
