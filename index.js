@@ -5,9 +5,7 @@ var loadquote = function() {
         data: {},
         dataType: 'json',
         success: function(data) {
-            $("#quote-text").html(`"${data.quote}"`);
             youtubeCall(data.quote, data.author);
-            movieInfoCall(data.author);
         },
         error: function(err) { alert("Internet Disconnected!"); },
         beforeSend: function(xhr) {
@@ -41,7 +39,6 @@ function showResultsOMDB(data) {
 
 }
 
-
 function youtubeCall(quote, movie) {
     const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 
@@ -52,12 +49,38 @@ function youtubeCall(quote, movie) {
         key: "AIzaSyDW01WDj_JY47WKZmAJ14fj7TXaiM-nOZM"
 
     }
-    $.getJSON(YOUTUBE_SEARCH_URL, query, getJSONCB);
-    console.log(query.q);
+    
+
+    if(
+        quote !== brokenVids.a && 
+        quote !== brokenVids.b &&
+        quote !== brokenVids.c &&
+        quote !== brokenVids.d &&
+        quote !== brokenVids.e &&
+        quote !== brokenVids.f &&
+        quote !== brokenVids.g &&
+        quote !== brokenVids.h &&
+        quote !== brokenVids.i &&
+        quote !== brokenVids.j &&
+        quote !== brokenVids.k &&
+        quote !== brokenVids.l &&
+        quote !== brokenVids.m &&
+        quote !== brokenVids.n &&
+        quote !== brokenVids.o &&
+        quote !== brokenVids.p &&
+        quote !== brokenVids.q
+
+    ) {
+        $.getJSON(YOUTUBE_SEARCH_URL, query, getJSONCB);
+        movieInfoCall(movie);
+        console.log(quote);
+        console.log(query.q);
+    } else {
+        loadquote(); 
+    }
 }
 
 function getJSONCB(data) {
-    
     for (let i = 0; i < 5; i++) {
         if (data.items[i].snippet.channelTitle !== "Movieclips" &&
             data.items[i].snippet.title !== "AFI's 100 Movie Quotes (Part 1)") {
@@ -76,4 +99,26 @@ function getJSONCB(data) {
 
 }
 
+const brokenVids = {
+    a: "What we've got here is failure to communicate.",
+    b: "Why don't you come up sometime and see me?",
+    c: "Do, or do not. There is no 'try'.",
+    d: "If you build it, he will come.",
+    e: "Elementary, my dear Watson.",
+    f: "You're gonna need a bigger boat.",
+    g: "A boy's best friend is his mother.",
+    h: "I'm walking here! I'm walking here!",
+    i: "Say hello to my little friend!",
+    j: "Badges? We ain't got no badges! We don't need no badges! I don't have to show you any stinking badges!",
+    k: "Of all the gin joints in all the towns in all the world, she walks into mine.",
+    l: "Houston, we have a problem.",
+    m: "I see dead people.",
+    n: "Oh, no, it wasn't the airplanes. It was Beauty killed the Beast.",
+    o: "Play it, Sam. Play 'As Time Goes By.'",
+    p: "Nobody puts Baby in a corner.",
+    q: "E.T. phone home.",
+
+
+
+}
 //key for omdb api: 26e9994f

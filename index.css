@@ -109,7 +109,7 @@ header {
 .button {
     padding: 10px;
     border: none;
-    background-color: #23CDFD;
+    background-color: #16FEB2;
     color: black;
     font-size: 20px;
     text-transform: uppercase;
@@ -122,19 +122,13 @@ header {
   }
   
   .button:hover, .button:focus {
-    background-color: #16FEB2;
+    background-color: #14E6DC;
     color: black;
   }
 
-
-  /* #quote-text {
-    text-align: center;
-    margin: 10px; 
-    font-size: 18px;
-    font-family: comic sans MS;
-    font-style: italic;
-    color: white;
-} */
+  button.pressed {
+    background-color: red;
+}
 
 @media only screen and (max-width:1026px) {
     .button {
