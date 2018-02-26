@@ -7,12 +7,10 @@
     width: 90%;
     max-width: 1024px;
     margin: auto;
-    /* border: 1px solid red; */
     position: relative;
 }
 
 .div-left{
-    /* border: 1px solid red; */
     margin-top: 20px;
     width: 60%;
     float: left;
@@ -22,9 +20,8 @@
     margin-top: 20px; 
     color: white;
     font-size: 20px;
-    /* border: 1px solid red; */
     width: 40%; 
-    float:left;
+    float: left;
     padding-left: 60px;
     padding-right: 40px;
     padding-top: 40px;
@@ -60,15 +57,9 @@
         height:100%;
     }
 
-#video-outer-container {
-    /* width: 60%;  */
-    /* margin: 0 auto; */
-    /* border: 1px solid green; */
-}
-
 main {
     text-align: left;
-    display: inline-block
+    display: inline-block;
 }
 
 header {
@@ -128,7 +119,6 @@ header {
         bottom: 0px;
         left: 0px;
     }
-
 }
 
 @media only screen and (max-width:768px) {

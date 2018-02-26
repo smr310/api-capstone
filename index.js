@@ -30,22 +30,19 @@ function movieInfoCall(movieName) {
     $.getJSON(OMDB_REQUEST_URL, query, showResultsOMDB); 
 }
 
-
 function displayVideoAndInfo(quote, movie) {
     const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
-
     const query = {
         q: `${quote} ${movie} movie scene`,
         per_page: 1,
         part: 'snippet',
         key: "AIzaSyDW01WDj_JY47WKZmAJ14fj7TXaiM-nOZM"
-
     }
-
+    //if video is broken, run loadquote again. 
     if (checkVideoBrokenStatus(quote)) {
         loadquote(); 
     } else {
-        $.getJSON(YOUTUBE_SEARCH_URL, query, getJSONCB);
+        $.getJSON(YOUTUBE_SEARCH_URL, query, loadYoutubeVideo);
         movieInfoCall(movie);
         console.log(quote);
         console.log(query.q);
@@ -62,7 +59,7 @@ function showResultsOMDB(data) {
     $(".div-right").append(`<p class="property-name">Story: <span class="info-text">${data.Plot}</span></p>`);
 }
 
-function getJSONCB(data) {
+function loadYoutubeVideo(data) {
     for (let i = 0; i < 5; i++) {
         if (data.items[i].snippet.channelTitle !== "Movieclips" &&
             data.items[i].snippet.title !== "AFI's 100 Movie Quotes (Part 1)") {
@@ -73,15 +70,9 @@ function getJSONCB(data) {
             break;
         }   
     }
-
 }
 
-
-
-
-
-
-
+//checks if video is broken 
 function checkVideoBrokenStatus(quote){ 
     if(
         quote !== brokenVids.a && 
@@ -110,8 +101,6 @@ function checkVideoBrokenStatus(quote){
     }
 }
 
-
-
 //these quotes belong to broken videos
 const brokenVids = {
     a: "What we've got here is failure to communicate.",
@@ -132,5 +121,4 @@ const brokenVids = {
     p: "Nobody puts Baby in a corner.",
     q: "E.T. phone home.",
     r: "Keep your friends close, but your enemies closer.",
-    
 }
