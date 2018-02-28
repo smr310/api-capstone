@@ -24,7 +24,7 @@ function loadquote() {
 
 //api that returns movie details 
 function movieInfoCall(movieName) {
-    const OMDB_REQUEST_URL = 'http://www.omdbapi.com/?apikey=26e9994f&';
+    const OMDB_REQUEST_URL = 'https://www.omdbapi.com/?apikey=26e9994f&';
     const query = {
         t: `${movieName}`, 
     }
