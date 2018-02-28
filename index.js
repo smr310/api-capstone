@@ -3,6 +3,7 @@ $(".button").on("click", function() {
 });
 
 //api that returns random famous movie quote
+
 function loadquote() {
     $.ajax({
         type: "GET",
