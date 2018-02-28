@@ -21,15 +21,6 @@ function loadquote() {
     });
 };
 
-<<<<<<< HEAD
-$("#get-quote-button").on("click", function() {
-    loadquote();
-})
-
-
-
-//new code
-=======
 //api that returns movie details 
 function movieInfoCall(movieName) {
     const OMDB_REQUEST_URL = 'http://www.omdbapi.com/?apikey=26e9994f&';
@@ -131,4 +122,3 @@ const brokenVids = {
     q: "E.T. phone home.",
     r: "Keep your friends close, but your enemies closer.",
 }
->>>>>>> testbranch
