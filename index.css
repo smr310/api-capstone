@@ -3,43 +3,80 @@
     background-color: black;
 }
 
+
+.button {
+    padding: 10px;
+    border: none;
+    background-color: #16FEB2;
+    color: black;
+    font-size: 20px;
+    text-transform: uppercase;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0px auto 20px;
+    /* position: absolute;
+    left: 710px;
+    bottom: 69px;  */
+  }
+  
+  .button:hover, .button:focus {
+    background-color: #14E6DC;
+    color: black;
+  }
+
+
 #container {
     width: 90%;
-    max-width: 1024px;
+    /* max-width: 1024px; */
     margin: auto;
     position: relative;
 }
 
-.div-left{
-    margin-top: 20px;
-    width: 60%;
-    float: left;
+.instructions {
+    text-align: center;
 }
 
-.div-right{
-    margin-top: 20px; 
+p {
     color: white;
+}
+
+header {
+    font-size: 28px;
+    text-align: center;
+    margin: 10px 0px 20px;
+    color: white;
+    font-family: Courier New;
+}
+
+.title{
+    text-align: left;
+    color: white;
+    font-family: 'Trebuchet MS';
+    font-weight: bold;
     font-size: 20px;
-    width: 40%; 
-    float: left;
-    padding-left: 60px;
-    padding-right: 40px;
-    padding-top: 40px;
+    margin: 40px 0px 10px;
 }
 
-.group:before,
-.group:after {
-    content: "";
-    display: table;
+.property-name {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 0px;
 }
 
-.group:after {
-    clear: both;
+.info-text {
+    font-weight: normal;
+    font-size: 15px;
+    color: white;
 }
 
-.group {
-    zoom: 1;
-}
+
+
+
+
+
 
 .video-container {
     position: relative;
@@ -57,80 +94,50 @@
         height:100%;
     }
 
-main {
-    text-align: left;
-    display: inline-block;
-}
+@media only screen and (min-width: 760px) {
+    header {
+        margin-top: 30px;
+    }
+    
+    .instructions {
+        margin-top: 50px;
+    }
+    
+    .title{
+        margin: 0px;
+    }
 
-header {
-    margin-top: 70px;
-    margin-bottom: 70px; 
-    color: white;
-    text-align: left;
-    font-family: Courier New;
-    font-size: 40px;
-    display: inline-block;
-}
-
-.title{
-    color: white;
-    font-family: 'Trebuchet MS';
-    font-weight: bold;
-    font-size: 28px;
-    margin: 0px;
-}
-
-.property-name {
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 25px;
-    margin-bottom: 0px;
-}
-
-.info-text {
-    font-weight: normal;
-    font-size: 18px;
-    color: white;
-}
-
-.button {
-    padding: 10px;
-    border: none;
-    background-color: #16FEB2;
-    color: black;
-    font-size: 20px;
-    text-transform: uppercase;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: absolute;
-    left: 710px;
-    bottom: 69px; 
-  }
-  
-  .button:hover, .button:focus {
-    background-color: #14E6DC;
-    color: black;
-  }
-
-@media only screen and (max-width:1026px) {
-    .button {
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
+    .div-left{
+        border: 1px solid red;
+        margin-top: 20px;
+        width: 60%;
+        float: left;
+    }
+    
+    .div-right{
+        border: 1px solid red;
+        margin-top: 0px; 
+        color: white;
+        font-size: 20px;
+        width: 40%; 
+        float: left;
+        padding-left: 60px;
+        padding-right: 40px;
+        padding-top: 40px;
+    }
+    
+    .group:before,
+    .group:after {
+        content: "";
+        display: table;
+    }
+    
+    .group:after {
+        clear: both;
+    }
+    
+    .group {
+        zoom: 1;
     }
 }
 
-@media only screen and (max-width:768px) {
-    .div-left {
-        width: 100%;
-    }
-    .div-right {
-        width: 100%;
-    } 
-    .button {
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-    }
-}
