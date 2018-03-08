@@ -26,6 +26,11 @@
     color: black;
   }
 
+/* .disabled {
+    color: white;
+    background-color: grey;
+    pointer-events: none;
+} */
 
 #container {
     width: 90%;
@@ -72,7 +77,10 @@ header {
     color: white;
 }
 
-
+.div-right {
+    padding-left: 40px;
+    padding-right: 40px;
+}
 
 
 
@@ -108,17 +116,16 @@ header {
     }
 
     .div-left{
-        border: 1px solid red;
+        /* border: 1px solid red; */
         margin-top: 20px;
         width: 60%;
         float: left;
     }
     
     .div-right{
-        border: 1px solid red;
-        margin-top: 0px; 
+        /* border: 1px solid red; */
+        margin-top: 20px; 
         color: white;
-        font-size: 20px;
         width: 40%; 
         float: left;
         padding-left: 60px;
@@ -126,6 +133,14 @@ header {
         padding-top: 40px;
     }
     
+    .property-name {
+        font-size: 16px;
+    }
+
+    .info-text {
+        font-size: 15px;
+    }
+
     .group:before,
     .group:after {
         content: "";
