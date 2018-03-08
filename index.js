@@ -3,9 +3,9 @@ $(load)
 function load() {
     $(".button").on("click", function() {
         loadquote();
-        $(this)
-            .prop("disabled",true)
-            .addClass("disabled");
+        // $(this)
+        //     .prop("disabled",true)
+        //     .addClass("disabled");
     });
 }
 
@@ -58,37 +58,45 @@ function showResultsOMDB(movieQuote, movieName, data) {
     console.log("get movie info API success", data);
     console.log(data.Year);
     
-    
+    if (data.Response !== "False") {
+        const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
+        const query = {
+            q: `${movieQuote} ${movieName} movie scene`,
+            per_page: 1,
+            part: 'snippet',
+            key: "AIzaSyDW01WDj_JY47WKZmAJ14fj7TXaiM-nOZM"
+        }
+        //console.log for reference
+        console.log("youtube query: ", query.q);
 
-    const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
-    const query = {
-        q: `${movieQuote} ${movieName} movie scene`,
-        per_page: 1,
-        part: 'snippet',
-        key: "AIzaSyDW01WDj_JY47WKZmAJ14fj7TXaiM-nOZM"
-    }
-    
-    let youtubeJSON = $.getJSON(YOUTUBE_SEARCH_URL, query, loadYoutubeVideo)
-    .always(function(){
-        //enable button 
-        setTimeout(function(){ 
-            $(".button")
-                    .prop("disabled", false)
-                    .removeClass("disabled");; 
-        }, 1000);
-    });
+        let youtubeJSON = $.getJSON(YOUTUBE_SEARCH_URL, query, loadYoutubeVideo)
+        .always(function(){
+            //enable button 
+            setTimeout(function(){ 
+                $(".button")
+                        // .prop("disabled", false)
+                        // .removeClass("disabled");; 
+            }, 1000);
+        });
 
-    $(".div-right").html(`<p class="title">${data.Title}</p>`);
-    $(".div-right").append(`<p class="property-name">Year: <span class="info-text">${data.Year}</span></p>`);
-    $(".div-right").append(`<p class="property-name">Director: <span class="info-text">${data.Director}</span></p>`);
-    $(".div-right").append(`<p class="property-name">Cast: <span class="info-text">${data.Actors}</span></p>`);
-    $(".div-right").append(`<p class="property-name">Story: <span class="info-text">${data.Plot}</span></p>`);
+        $(".div-right").html(`<p class="title">${data.Title}</p>`);
+        $(".div-right").append(`<p class="property-name">Year: <span class="info-text">${data.Year}</span></p>`);
+        $(".div-right").append(`<p class="property-name">Director: <span class="info-text">${data.Director}</span></p>`);
+        $(".div-right").append(`<p class="property-name">Cast: <span class="info-text">${data.Actors}</span></p>`);
+        $(".div-right").append(`<p class="property-name">Story: <span class="info-text">${data.Plot}</span></p>`);
+
+    } else {
+        loadquote();
+    };
+
+   
     
 }
 
 function loadYoutubeVideo(data) {
     for (let i = 0; i < 5; i++) {
-        if (data.items[i].snippet.channelTitle !== "Movieclips" &&
+        if (
+            // data.items[i].snippet.channelTitle !== "Movieclips" &&
             data.items[i].snippet.title !== "AFI's 100 Movie Quotes (Part 1)") {
             $("#video").html(`<div id="video-outer-container"><div class="video-container"><iframe width="500" height="300" src="https://www.youtube.com/embed/${data.items[i].id.videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe></div></div>`);
             break;
