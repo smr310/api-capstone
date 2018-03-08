@@ -18,12 +18,18 @@ function loadquote() {
         data: {},
         dataType: 'json',
         success: function(data) {
-            let movieQuote = data.quote;
-            let movieName = data.author;
-            movieInfoCall(movieQuote, movieName); 
-            
-            //console.log for reference 
-            console.log("get quote API success", data);
+            //if ajax call returns broken movie, call loadquote function again
+            if(data.author === "On Golden Pond") {
+                console.log("caught broken movie: On Golden Pond", data);
+                loadquote();
+            } else {
+                let movieQuote = data.quote;
+                let movieName = data.author;
+                movieInfoCall(movieQuote, movieName); 
+                
+                //console.log for reference 
+                console.log("get quote API success", data);
+            };
         },
         error: function(err) { 
             console.error("random quote", err); 
