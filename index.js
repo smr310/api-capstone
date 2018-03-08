@@ -3,9 +3,9 @@ $(load)
 function load() {
     $(".button").on("click", function() {
         loadquote();
-        // $(this)
-        //     .prop("disabled",true)
-        //     .addClass("disabled");
+        $(".button")
+            .prop("disabled", true)
+            .addClass("disabled");
     });
 }
 
@@ -45,7 +45,8 @@ function movieInfoCall(movieQuote, movieName) {
         dataType: 'jsonp',
         success: showResultsOMDB.bind(this, movieQuote, movieName),
         error: function(err) {
-            console.log("error OMDB", err);    
+            console.log("error OMDB", err);
+            loadquote();    
         },
         beforeSend: function(xhr) {}
     });
@@ -58,7 +59,10 @@ function showResultsOMDB(movieQuote, movieName, data) {
     console.log("get movie info API success", data);
     console.log(data.Year);
     
-    if (data.Response !== "False") {
+    if (data.Response === "False") {        
+        loadquote();
+
+    } else {
         const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
         const query = {
             q: `${movieQuote} ${movieName} movie scene`,
@@ -74,9 +78,9 @@ function showResultsOMDB(movieQuote, movieName, data) {
             //enable button 
             setTimeout(function(){ 
                 $(".button")
-                        // .prop("disabled", false)
-                        // .removeClass("disabled");; 
-            }, 1000);
+                        .prop("disabled", false)
+                        .removeClass("disabled");
+            }, 1200);
         });
 
         $(".div-right").html(`<p class="title">${data.Title}</p>`);
@@ -84,13 +88,7 @@ function showResultsOMDB(movieQuote, movieName, data) {
         $(".div-right").append(`<p class="property-name">Director: <span class="info-text">${data.Director}</span></p>`);
         $(".div-right").append(`<p class="property-name">Cast: <span class="info-text">${data.Actors}</span></p>`);
         $(".div-right").append(`<p class="property-name">Story: <span class="info-text">${data.Plot}</span></p>`);
-
-    } else {
-        loadquote();
     };
-
-   
-    
 }
 
 function loadYoutubeVideo(data) {

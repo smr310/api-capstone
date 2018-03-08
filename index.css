@@ -26,11 +26,11 @@
     color: black;
   }
 
-/* .disabled {
+.disabled {
     color: white;
     background-color: grey;
     pointer-events: none;
-} */
+}
 
 #container {
     width: 90%;
@@ -134,11 +134,11 @@ header {
     }
     
     .property-name {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .info-text {
-        font-size: 15px;
+        font-size: 16px;
     }
 
     .group:before,
