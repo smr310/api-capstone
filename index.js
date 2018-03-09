@@ -1,6 +1,7 @@
 $(load)
 
 function load() {
+    $("#ballsWaveG").hide();
     $(".button").on("click", function() {
         loadquote();
         $(".button")
@@ -19,20 +20,16 @@ function loadquote() {
         dataType: 'json',
         success: function(data) {
             //if ajax call returns broken movie, call loadquote function again
-            if(data.author === "On Golden Pond") {
-                console.log("caught broken movie: On Golden Pond", data);
+            if(data.author === "On Golden Pond" || data.author === "The Sixth Sense") {
                 loadquote();
             } else {
                 let movieQuote = data.quote;
                 let movieName = data.author;
                 movieInfoCall(movieQuote, movieName); 
-                
-                //console.log for reference 
-                console.log("get quote API success", data);
             };
         },
         error: function(err) { 
-            console.error("random quote", err); 
+            loadquote();   
         },
         beforeSend: function(xhr) {
             xhr.setRequestHeader("X-Mashape-Authorization", "ryB0q5KlGGmshFp7gYxbKmNNlYwZp1VR487jsnByzMIGHEKhc3");
@@ -43,32 +40,29 @@ function loadquote() {
 //api that returns movie details 
 function movieInfoCall(movieQuote, movieName) {
     const OMDB_REQUEST_URL = 'https://www.omdbapi.com/?apikey=26e9994f&t='+ movieName;
-
     $.ajax({
         type: "GET",
         url: OMDB_REQUEST_URL,
         data: {},
         dataType: 'jsonp',
         success: showResultsOMDB.bind(this, movieQuote, movieName),
+        timeout: 3000,
         error: function(err) {
-            console.log("error OMDB", err);
             loadquote();    
         },
-        beforeSend: function(xhr) {}
+        beforeSend: function() {
+            $("#ballsWaveG").show();
+        },
     });
 
 }
 
-
 function showResultsOMDB(movieQuote, movieName, data) {
-    //console.logs for reference 
-    console.log("get movie info API success", data);
-    console.log(data.Year);
-    
+    //if OMDB api returns incomplete movie info then call loadquote again
     if (data.Response === "False") {        
         loadquote();
-
     } else {
+        $("#ballsWaveG").hide();
         const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
         const query = {
             q: `${movieQuote} ${movieName} movie scene`,
@@ -76,8 +70,7 @@ function showResultsOMDB(movieQuote, movieName, data) {
             part: 'snippet',
             key: "AIzaSyDW01WDj_JY47WKZmAJ14fj7TXaiM-nOZM"
         }
-        //console.log for reference
-        console.log("youtube query: ", query.q);
+
 
         let youtubeJSON = $.getJSON(YOUTUBE_SEARCH_URL, query, loadYoutubeVideo)
         .always(function(){
@@ -86,7 +79,7 @@ function showResultsOMDB(movieQuote, movieName, data) {
                 $(".button")
                         .prop("disabled", false)
                         .removeClass("disabled");
-            }, 1200);
+            }, 0);
         });
 
         $(".div-right").html(`<p class="title">${data.Title}</p>`);
