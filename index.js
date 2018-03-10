@@ -1,15 +1,16 @@
 $(load)
 
 function load() {
+    //hide loading bar
     $("#ballsWaveG").hide();
+
     $(".button").on("click", function() {
-        loadquote();
         $(".button")
-            .prop("disabled", true)
-            .addClass("disabled");
+            .addClass("disabled")
+            .prop("disabled", true);
+        loadquote();
     });
 }
-
 
 //api that returns random famous movie quote
 function loadquote() {
@@ -20,7 +21,7 @@ function loadquote() {
         dataType: 'json',
         success: function(data) {
             //if ajax call returns broken movie, call loadquote function again
-            if(data.author === "On Golden Pond" || data.author === "The Sixth Sense") {
+            if(data.author === "On Golden Pond" || data.author === "The Sixth Sense" || data.author === "Sunset Blvd.") {
                 loadquote();
             } else {
                 let movieQuote = data.quote;
@@ -51,10 +52,10 @@ function movieInfoCall(movieQuote, movieName) {
             loadquote();    
         },
         beforeSend: function() {
+            //show loading bar
             $("#ballsWaveG").show();
         },
     });
-
 }
 
 function showResultsOMDB(movieQuote, movieName, data) {
@@ -62,7 +63,10 @@ function showResultsOMDB(movieQuote, movieName, data) {
     if (data.Response === "False") {        
         loadquote();
     } else {
+        //hide loading bar
         $("#ballsWaveG").hide();
+        
+        //api to get corresponding youtube video
         const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
         const query = {
             q: `${movieQuote} ${movieName} movie scene`,
@@ -70,18 +74,15 @@ function showResultsOMDB(movieQuote, movieName, data) {
             part: 'snippet',
             key: "AIzaSyDW01WDj_JY47WKZmAJ14fj7TXaiM-nOZM"
         }
-
-
         let youtubeJSON = $.getJSON(YOUTUBE_SEARCH_URL, query, loadYoutubeVideo)
         .always(function(){
             //enable button 
-            setTimeout(function(){ 
-                $(".button")
-                        .prop("disabled", false)
-                        .removeClass("disabled");
-            }, 0);
+            $(".button")
+                .prop("disabled", false)
+                .removeClass("disabled");
         });
 
+        //display movie info on DOM
         $(".div-right").html(`<p class="title">${data.Title}</p>`);
         $(".div-right").append(`<p class="property-name">Year: <span class="info-text">${data.Year}</span></p>`);
         $(".div-right").append(`<p class="property-name">Director: <span class="info-text">${data.Director}</span></p>`);
@@ -90,11 +91,11 @@ function showResultsOMDB(movieQuote, movieName, data) {
     };
 }
 
+//display youtube video on DOM
 function loadYoutubeVideo(data) {
     for (let i = 0; i < 5; i++) {
-        if (
-            // data.items[i].snippet.channelTitle !== "Movieclips" &&
-            data.items[i].snippet.title !== "AFI's 100 Movie Quotes (Part 1)") {
+        //execute code within if statement if youtube video title is acceptable
+        if (data.items[i].snippet.title !== "AFI's 100 Movie Quotes (Part 1)") {
             $("#video").html(`<div id="video-outer-container"><div class="video-container"><iframe width="500" height="300" src="https://www.youtube.com/embed/${data.items[i].id.videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe></div></div>`);
             break;
         }   
