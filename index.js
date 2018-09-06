@@ -20,14 +20,20 @@ function loadquote() {
         data: {},
         dataType: 'json',
         success: function(data) {
+
             //if ajax call returns broken movie, call loadquote function again
-            if(data.author === "On Golden Pond" || data.author === "The Sixth Sense" || data.author === "Sunset Blvd.") {
-                loadquote();
-            } else {
-                let movieQuote = data.quote;
-                let movieName = data.author;
-                movieInfoCall(movieQuote, movieName); 
-            };
+            for(let i = 0; i < brokenMovies.length; i++) {
+                if (data[0].author === brokenMovies[i]) {
+                    loadquote();
+                    break;
+                } else if (i === brokenMovies.length - 1) {
+                    let movieQuote = data[0].quote;
+                    let movieName = data[0].author;
+                    movieInfoCall(movieQuote, movieName); 
+                }
+            }
+
+           
         },
         error: function(err) { 
             loadquote();   
@@ -40,13 +46,15 @@ function loadquote() {
 
 //api that returns movie details 
 function movieInfoCall(movieQuote, movieName) {
-    const OMDB_REQUEST_URL = 'https://www.omdbapi.com/?apikey=26e9994f&t='+ movieName;
+    
+    const OMDB_REQUEST_URL = 'https://www.omdbapi.com/?apikey=26e9994f&t=' + movieName;
     $.ajax({
         type: "GET",
         url: OMDB_REQUEST_URL,
         data: {},
         dataType: 'jsonp',
-        success: showResultsOMDB.bind(this, movieQuote, movieName),
+        success: 
+            showResultsOMDB.bind(this, movieQuote, movieName),
         timeout: 3000,
         error: function(err) {
             loadquote();    
@@ -60,12 +68,13 @@ function movieInfoCall(movieQuote, movieName) {
 
 function showResultsOMDB(movieQuote, movieName, data) {
     //if OMDB api returns incomplete movie info then call loadquote again
+
     if (data.Response === "False") {        
         loadquote();
     } else {
         //hide loading bar
         $("#ballsWaveG").hide();
-        
+
         //api to get corresponding youtube video
         const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
         const query = {
@@ -93,11 +102,22 @@ function showResultsOMDB(movieQuote, movieName, data) {
 
 //display youtube video on DOM
 function loadYoutubeVideo(data) {
+
     for (let i = 0; i < 5; i++) {
         //execute code within if statement if youtube video title is acceptable
         if (data.items[i].snippet.title !== "AFI's 100 Movie Quotes (Part 1)") {
-            $("#video").html(`<div id="video-outer-container"><div class="video-container"><iframe width="500" height="300" src="https://www.youtube.com/embed/${data.items[i].id.videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe></div></div>`);
+            $("#video").html(`<div id="video-outer-container"><div class="video-container"><iframe id="videoiframe" width="500" height="300" src="https://www.youtube.com/embed/${data.items[i].id.videoId}?&mute=1&autoplay=1" frameborder="0" allowfullscreen></iframe></div></div>`);
             break;
         }   
     }
 }
+
+//array of movie tites that are buggy -- youtube playback has been disabled, etc...
+let brokenMovies = [
+    'Midnight Cowboy', 
+    'On Golden Pond',
+    'The Sixth Sense',
+    'Sunset Blvd.',
+    'Dirty Dancing',
+    'Casablanca'
+]
