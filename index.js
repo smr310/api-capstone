@@ -106,7 +106,7 @@ function loadYoutubeVideo(data) {
     for (let i = 0; i < 5; i++) {
         //execute code within if statement if youtube video title is acceptable
         if (data.items[i].snippet.title !== "AFI's 100 Movie Quotes (Part 1)") {
-            $("#video").html(`<div id="video-outer-container"><div class="video-container"><iframe id="videoiframe" width="500" height="300" src="https://www.youtube.com/embed/${data.items[i].id.videoId}?&mute=1&autoplay=1" frameborder="0" allowfullscreen></iframe></div></div>`);
+            $("#video").html(`<div id="video-outer-container"><div class="video-container"><iframe id="videoiframe" width="500" height="300" src="https://www.youtube.com/embed/${data.items[i].id.videoId}?&mute=1&autoplay=0" frameborder="0" allowfullscreen></iframe></div></div>`);
             break;
         }   
     }
