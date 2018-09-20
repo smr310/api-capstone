@@ -1,4 +1,6 @@
 # good scenes from good movies
+Live link: https://smr310.github.io/good-scenes/
+
 A famous movie scene generator. Click the generate button and a video of a famous movie scene will appear along with the movie details. 
 
 ## Motivation
